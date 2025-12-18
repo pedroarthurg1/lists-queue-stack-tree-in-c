@@ -8,13 +8,23 @@ typedef struct list {
 List* lst_cria();
 List* lst_insere(List* l,int info);
 void lst_imprime(List* l);
-int lst_vazia(List* l);
+int lst_vazia(List* l);                 // return 1 void list and return 0 not void list
+List* lst_search(List* l, int info);
 
 int main() {
     List* l;
-    l = lst_cria();                 // create and init void list
-    l = lst_insere(l , 23);         // insert 23 in list           
-    l = lst_insere(l , 45);         // insert 45 in list
+    l = lst_cria();// create and init void list
+
+    int x , y, z;
+    printf("Digite um elemento para inserir na lista: ");
+    scanf("%d",&x);
+    printf("Digite um elemento para inserir na lista: ");
+    scanf("%d",&y);
+    printf("Digite um elemento para procurar na lista:");
+    scanf("%d",&z);
+    l = lst_insere(l , x);         // insert 23 in list
+    l = lst_insere(l , y);     
+    lst_search(l,y);   
     lst_imprime(l);
     
 
@@ -37,9 +47,21 @@ void lst_imprime(List* l) {
     List* p;
 
     for(p = l ; p != NULL ; p = p->prox) 
-        printf("info = %d\n", p->info);
+        printf("%d\n", p->info);
 }
 
 int lst_vazia(List* l) {
     return (l == NULL);
+}
+
+List* lst_search(List* l , int info) {
+    List* p;
+    for(p = l; p != NULL; p = p->prox) {
+        if(p->info == info) {
+            printf("VALOR ENCONTRADO\n");
+            return p;
+        }
+            
+    }
+    return NULL;            // NOT FIND ELEMENT
 }
