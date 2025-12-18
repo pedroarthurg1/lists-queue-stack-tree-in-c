@@ -118,7 +118,7 @@ int arv_estrita(No* a) {
     }
 }
 
-No* arv_clona(No* a) {
+No* arv_clona(No* a , int info) {
     No* no_clone = (No*)malloc(sizeof(No));
     no_clone->info = info;
     no_clone->sae = a->sae;

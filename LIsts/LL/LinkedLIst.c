@@ -10,21 +10,19 @@ List* lst_insere(List* l,int info);
 void lst_imprime(List* l);
 int lst_vazia(List* l);                 // return 1 void list and return 0 not void list
 List* lst_search(List* l, int info);
+List* lst_retira(List* l ,int info);
+void lst_libera(List* l);
 
 int main() {
     List* l;
     l = lst_cria();// create and init void list
-
-    int x , y, z;
-    printf("Digite um elemento para inserir na lista: ");
-    scanf("%d",&x);
-    printf("Digite um elemento para inserir na lista: ");
-    scanf("%d",&y);
-    printf("Digite um elemento para procurar na lista:");
-    scanf("%d",&z);
-    l = lst_insere(l , x);         // insert 23 in list
-    l = lst_insere(l , y);     
-    lst_search(l,y);   
+    int b, r;
+    l = lst_insere(l , 1);         // insert 23 in list
+    l = lst_insere(l , 2);
+    l = lst_insere(l , 3);
+    l = lst_insere(l , 4);    
+    lst_search(l,b);
+    lst_retira(l,r);  
     lst_imprime(l);
     
 
@@ -64,4 +62,33 @@ List* lst_search(List* l , int info) {
             
     }
     return NULL;            // NOT FIND ELEMENT
+}   
+
+List* lst_retira(List* l ,int info) {
+    List* ant = NULL;       // ponteiro para elemento anterior
+    List* p = l;            // ponteiro para percorrer lista
+    
+    while(p != NULL && p->info != info) {
+        ant = p;                
+        p->info = p;            // guarda elemento anterior
+    }
+
+    if(p == NULL)
+        return l;               // elemento nao encontrado
+
+    if(ant == NULL)
+        l = p->prox;            //  retira inicio
+    else
+        ant->prox = p->prox;    // retira meio
+}
+
+void lst_libera(List* l) {
+    List* p = l;
+    while (p != NULL)
+    {
+        List* t = p->prox;
+        free(p);        // libera memoria para onde aponta p
+        p = t;          // aponta proximo
+    }
+    
 }
