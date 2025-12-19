@@ -70,7 +70,7 @@ List* lst_retira(List* l ,int info) {
     
     while(p != NULL && p->info != info) {
         ant = p;                
-        p->info = p;            // guarda elemento anterior
+        p = p->prox;            // guarda elemento anterior
     }
 
     if(p == NULL)
